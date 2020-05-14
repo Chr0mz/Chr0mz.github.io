@@ -108,8 +108,7 @@
                 log('Requesting bluetooth device...');
 
                 return navigator.bluetooth.requestDevice({
-                   // filters: [{ services: [0xFFE0] }],
-                   acceptAllDevices = true,
+                    filters: [{ acceptAllDevices = true }],
 
                 }).
                     then(device => {
