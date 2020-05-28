@@ -86,7 +86,7 @@
                 disconnect();
             });
 
-            // Handle form submit event
+            // håndtere en form med brugerinput ved tryk af "submit"
             sendForm.addEventListener('submit', function (event) {
                 event.preventDefault(); // Prevents form sending
                 send(inputField.value); // Sends the inputfield contents
@@ -95,7 +95,7 @@
             });
 
 
-            // Launch Bluetooth device chooser and connect to the selected.
+            // Starter Bluetooth device vælger og connecter til den valgte bluetooth device
             function connect() {
                 return (deviceCache ? Promise.resolve(deviceCache) :
                     requestBluetoothDevice()).
@@ -103,7 +103,7 @@
                     then(characteristic => startNotifications(characteristic)).catch(error => log(error));
             }
 
-            // Request Bluetooth Device
+            // Henter Bluetooth devices
             function requestBluetoothDevice() {
                 log('Requesting bluetooth device...');
 
@@ -117,7 +117,7 @@
                     })
             }
 
-            // Connect device and chache characteristic
+            // Connecter til bluetooth device cachen og karakteristikken af devicen
             function connectDeviceAndCacheCharacteristic(device) {
                 if (device.gatt.connected && characteristicCache) {
                     return Promise.resolve(characteristicCache);
@@ -144,7 +144,7 @@
                     });
             }
 
-            // Start notifications
+            // Starter notifikationer
             function startNotifications(characteristic) {
                 log('Starting notifications...');
 
@@ -155,13 +155,13 @@
                     });
             }
 
-            // Self explanatory
+            // Logger hvad der sker i et tekstfeld
             function log(data, type = '') {
                 terminalContainer.insertAdjacentHTML('beforeend', '<div' + (type ? ' class=""' + type + '"' : '') + '>' + data + '</div>');
 
             }
 
-            // Handle disconnection
+            // Håndtere afbrydning af bluetooth device
             function handleDisconnection(event) {
                 let device = event.target;
 
@@ -171,7 +171,7 @@
                     then(characteristic => startNotifications(characteristic)).catch(error => log(error));
             }
 
-            // Disconnect from the connected device
+            // Afbryder fra devicet der er connected
             function disconnect() {
                 if (deviceCache) {
                     log('Disconnecting from' + deviceCache.name + '" Bluetooth device...');
@@ -195,7 +195,7 @@
 
                 deviceCache = null;
             }
-            // handles characteristics values that has changed.
+            // Håndtere karakteristiske værdier der er skiftet
             function handleCharacteristicValueChanged(event) {
                 let value = new TextDecoder().decode(event.target.value);
 
@@ -217,7 +217,7 @@
             function receive(data) {
                 log(data, 'in');
             }
-            // Send data
+            // Sender data
             function send(data) {
                 data = String(data);
 
