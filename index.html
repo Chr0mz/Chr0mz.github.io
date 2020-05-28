@@ -88,10 +88,10 @@
 
             // håndtere en form med brugerinput ved tryk af "submit"
             sendForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevents form sending
-                send(inputField.value); // Sends the inputfield contents
-                inputField.value = '';  // Zero text field
-                inputField.focus();     // Focus on the text field.
+                event.preventDefault(); // Preventere at forms bliver sendt
+                send(inputField.value); // Sender teksten i inputfield
+                inputField.value = '';  // Resetter inputfield så der ikke står noget
+                inputField.focus();     // Fokusere på teksten i feldtet
             });
 
 
