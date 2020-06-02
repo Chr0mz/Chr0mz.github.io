@@ -56,15 +56,23 @@
 
         <div id="terminal">
             <div>Bluetooth connection to device</div>
-            <div class="out">Outcoming message</div>
+            <div class="out">Outgoing message</div>
             <div class="in">Incoming message</div>
         </div>
 
-        <form id="send-form">
-            <input id="input" type="text">
-            <button type="submit">Submit</button>
-        </form>
+        <div id="info">
+            <h2>Information</h2>
+            <p>Vores produkt er en Arduino, der er forbundet til hjemmesiden ved hjælp af Bluetooth. For at få det til at virke, skal du trykke på "Connect To Bluetooth og derefter vælge din device. For at afkoble fra bluetooth, trykker du på "Disconnect from Bluetooth".</p>
+
+        </div>
         <script>
+            /* 
+            Bluetooth er lånt fra nettet, da det er ret så advanceret i forhold til mine skills i Javascript
+            Link: https://medium.com/@loginov_rocks/how-to-make-a-web-app-for-your-own-bluetooth-low-energy-device-arduino-2af8d16fdbe8
+            
+            - Jeppe
+            */
+
             // Får referencer fra bluetooth hjemmesiden, til UI elementer. 
             let connectButton = document.getElementById('connect');
             let disconnectButton = document.getElementById('disconnect');
@@ -84,14 +92,6 @@
             // Disconnecter fra et device ved button click
             disconnectButton.addEventListener('click', function () {
                 disconnect();
-            });
-
-            // håndtere en form med brugerinput ved tryk af "submit"
-            sendForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Preventere at forms bliver sendt
-                send(inputField.value); // Sender teksten i inputfield
-                inputField.value = '';  // Resetter inputfield så der ikke står noget
-                inputField.focus();     // Fokusere på teksten i feldtet
             });
 
 
@@ -171,7 +171,7 @@
                     then(characteristic => startNotifications(characteristic)).catch(error => log(error));
             }
 
-            // Afbryder fra devicet der er connected
+            // Disconnecter fra devicet der er connected
             function disconnect() {
                 if (deviceCache) {
                     log('Disconnecting from' + deviceCache.name + '" Bluetooth device...');
@@ -213,7 +213,7 @@
                     }
                 }
             }
-
+            // Får data
             function receive(data) {
                 log(data, 'in');
             }
